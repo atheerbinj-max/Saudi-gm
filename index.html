@@ -6,268 +6,325 @@
   <title>رحلتي في مناطق السعودية</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Cairo', sans-serif, Arial, sans-serif;
       background-color: #fff;
       color: #004d00;
       margin: 0; padding: 20px;
       text-align: center;
+      direction: rtl;
     }
     .screen {
       display: none;
+      max-width: 600px;
+      margin: 0 auto;
     }
     .active {
       display: block;
+    }
+    h1, h2, h3 {
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
     }
     button {
       background-color: #006C35;
       color: white;
       border: none;
-      border-radius: 20px;
-      padding: 10px 25px;
-      font-size: 1.2rem;
-      margin: 10px;
+      border-radius: 25px;
+      padding: 12px 30px;
+      font-size: 1.3rem;
+      margin: 10px 5px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
     }
     button:hover {
       background-color: #004d00;
     }
-    .background {
+    .btn-container {
+      margin-bottom: 30px;
+    }
+    .city-btn {
+      display: block;
       width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      max-width: 300px;
+      margin: 10px auto;
+      font-size: 1.4rem;
     }
     .quiz button {
-      width: 80%;
-      margin: 8px auto;
       display: block;
+      width: 100%;
+      max-width: 300px;
+      margin: 8px auto;
+      font-size: 1.2rem;
+      border-radius: 15px;
     }
     .correct {
       background-color: #CFAE62 !important;
       color: #004d00 !important;
+      cursor: default;
     }
     .wrong {
       background-color: #a33 !important;
+      cursor: default;
+    }
+    .back-btn {
+      background-color: #CFAE62;
+      color: #004d00;
+      font-weight: bold;
+      margin-top: 20px;
+      max-width: 150px;
+    }
+    .end-buttons button {
+      max-width: 200px;
+      margin: 10px auto;
+      display: block;
+    }
+    /* شاشة عمل الطالبات */
+    #screen-credit p {
+      font-size: 1.5rem;
+      margin: 20px 0;
+    }
+    #screen-credit div.info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 60px;
+      font-size: 1.2rem;
+      color: #004d00;
+    }
+    #screen-credit div.info div {
+      width: 45%;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
   <!-- شاشة البداية -->
-  <div id="home" class="screen active">
+  <section id="screen-home" class="screen active">
     <h1>✈️ رحلتي في مناطق السعودية</h1>
-    <button id="startBtn">ابدأ رحلتك</button>
-  </div>
+    <p>اختر رحلتك وتعرف على ثقافة وتراث المملكة.</p>
+    <button id="start-btn">ابدأ رحلتك</button>
+  </section>
 
   <!-- شاشة اختيار المدينة -->
-  <div id="select" class="screen">
-    <h2>اختر وجهتك الأولى:</h2>
-    <button class="cityBtn" data-city="makkah">🕋 مكة المكرمة</button>
-    <button class="cityBtn" data-city="alula">🏜️ العلا</button>
-    <button class="cityBtn" data-city="riyadh">🌆 الرياض</button>
-    <button class="cityBtn" data-city="aseer">🏔️ عسير</button>
-    <button class="cityBtn" data-city="east">🌊 المنطقة الشرقية</button>
-    <br />
-    <button id="backToHome">⬅️ العودة للرئيسية</button>
-  </div>
+  <section id="screen-select" class="screen">
+    <p>اختر وجهتك الأولى في المملكة العربية السعودية:</p>
+    <div class="btn-container">
+      <button class="city-btn" data-city="makkah">🕋 مكة المكرمة</button>
+      <button class="city-btn" data-city="alula">🏜️ العلا</button>
+      <button class="city-btn" data-city="riyadh">🌆 الرياض</button>
+      <button class="city-btn" data-city="aseer">🏔️ عسير</button>
+      <button class="city-btn" data-city="east">🌊 المنطقة الشرقية</button>
+    </div>
+    <button id="back-to-home" class="back-btn">⬅️ العودة للرئيسية</button>
+  </section>
 
   <!-- شاشة المدينة مع الأسئلة -->
-  <div id="cityScreen" class="screen">
-    <h2 id="cityTitle"></h2>
-    <img id="cityImage" class="background" src="" alt="صورة المدينة" />
-    <p id="cityDesc"></p>
-    <div class="quiz" id="quiz"></div>
-    <button id="backToSelect">⬅️ العودة لاختيار المدينة</button>
-  </div>
+  <section id="screen-city" class="screen">
+    <h2 class="city-title"></h2>
+    <p class="city-desc"></p>
+    <div class="quiz"></div>
+    <button id="back-to-select" class="back-btn">⬅️ العودة لاختيار المدينة</button>
+  </section>
 
   <!-- شاشة النهاية -->
-  <div id="endScreen" class="screen">
-    <h2>مبروك! أنهيت رحلتك.</h2>
-    <p id="scoreText"></p>
-    <button id="restartBtn">إعادة الرحلة</button>
-    <button id="backToHomeFromEnd">الرئيسية</button>
-  </div>
+  <section id="screen-end" class="screen">
+    <h2>مبروك 🌟 أنهيت رحلتك عبر مناطق السعودية!</h2>
+    <p id="score-text"></p>
+    <div class="end-buttons">
+      <button id="restart-btn">🔄 إعادة الرحلة</button>
+      <button id="share-btn">📤 شارك نتيجتك</button>
+      <button id="credit-btn" style="margin-top: 15px;">📋 عمل الطالبات</button>
+    </div>
+  </section>
+
+  <!-- شاشة عمل الطالبات -->
+  <section id="screen-credit" class="screen">
+    <h2>عمل الطالبات</h2>
+    <p>أثير بن جبل - دانة بالمعروف - ريفان باعجاج - زهور قحطان - مريم الحامد</p>
+    <div class="info">
+      <div>
+        <p><strong>مديرة المدرسة :</strong> سمر العقيل</p>
+      </div>
+      <div>
+        <p><strong>إشراف المعلمتان :</strong> نورة الشمراني - منال العمري</p>
+      </div>
+    </div>
+    <button id="credit-back-btn" class="back-btn" style="margin-top: 40px;">⬅️ العودة للرئيسية</button>
+  </section>
 
 <script>
-  // بيانات المدن والأسئلة
-  const citiesData = {
-    makkah: {
-      title: "🕋 مكة المكرمة",
-      desc: "مكة المكرمة قبلة المسلمين وأقدس بقاع الأرض.",
-      image: "images/makkah.jpg",
-      quiz: [
-        { question: "في أي سنة وُحدت المملكة العربية السعودية؟", options: ["1925", "1932", "1945"], answer: 1 },
-        { question: "من أشهر الأكلات في مكة:", options: ["المطبق", "البيتزا", "البرجر"], answer: 0 },
-        { question: "اللبس التقليدي في مكة:", options: ["الإحرام", "الكيمونو", "الساري"], answer: 0 },
-      ],
-    },
-    alula: {
-      title: "🏜️ العلا",
-      desc: "العلا مدينة التاريخ والحضارات القديمة، موطن مدائن صالح.",
-      image: "images/alula.jpg",
-      quiz: [
-        { question: "إلى أي حضارة تعود مدائن صالح؟", options: ["الإغريق", "الأنباط", "الرومان"], answer: 1 },
-        { question: "من الأكلات الشعبية في العلا:", options: ["الجريش", "السوشي", "الباستا"], answer: 0 },
-        { question: "اللباس التقليدي في العلا:", options: ["الثوب النجدي", "البذلة الرسمية", "الكيمونو"], answer: 0 },
-      ],
-    },
-    riyadh: {
-      title: "🌆 الرياض",
-      desc: "الرياض العاصمة الحديثة والمركز المالي والتجاري للمملكة.",
-      image: "images/riyadh.jpg",
-      quiz: [
-        { question: "ما اسم البرج الأشهر في الرياض؟", options: ["برج خليفة", "برج المملكة", "برج بيزا"], answer: 1 },
-        { question: "من أشهر الأكلات في الرياض:", options: ["الكبسة", "السوشي", "البان كيك"], answer: 0 },
-        { question: "اللباس التقليدي في الرياض:", options: ["الثوب الأبيض مع الشماغ", "الجينز والتيشيرت", "الساري"], answer: 0 },
-      ],
-    },
-    aseer: {
-      title: "🏔️ عسير",
-      desc: "عسير أرض الجبال والضباب والفنون الشعبية.",
-      image: "images/aseer.jpg",
-      quiz: [
-        { question: "ما أبرز مهرجان في عسير؟", options: ["مهرجان كان", "مهرجان رجال ألمع", "مهرجان ريو"], answer: 1 },
-        { question: "من الأكلات الشعبية في عسير:", options: ["الحنيذ", "الشاورما", "الباستا"], answer: 0 },
-        { question: "اللباس التقليدي في عسير:", options: ["الثوب العسيري المطرز", "الجينز", "البذلة الرسمية"], answer: 0 },
-      ],
-    },
-    east: {
-      title: "🌊 المنطقة الشرقية",
-      desc: "المنطقة الشرقية أرض النفط والبحر واللؤلؤ.",
-      image: "images/east.jpg",
-      quiz: [
-        { question: "ما أشهر مورد طبيعي في الشرقية؟", options: ["الذهب", "النفط", "الفضة"], answer: 1 },
-        { question: "من الأكلات الشعبية في الشرقية:", options: ["السمك المشوي", "السوشي", "البرجر"], answer: 0 },
-        { question: "اللباس التقليدي في الشرقية:", options: ["الدشداشة مع البشت", "البدلة الرياضية", "الكيمونو"], answer: 0 },
-      ],
+  document.addEventListener("DOMContentLoaded", function() {
+    const citiesData = {
+      makkah: {
+        title: "🕋 مكة المكرمة",
+        desc: "مكة المكرمة قبلة المسلمين وأقدس بقاع الأرض.",
+        quiz: [
+          { question: "في أي سنة وُحدت المملكة العربية السعودية؟", options: ["1925", "1932", "1945"], answer: 1 },
+          { question: "من أشهر الأكلات في مكة:", options: ["المطبق", "البيتزا", "البرجر"], answer: 0 },
+          { question: "اللبس التقليدي في مكة:", options: ["الإحرام", "الكيمونو", "الساري"], answer: 0 },
+        ],
+      },
+      alula: {
+        title: "🏜️ العلا",
+        desc: "العلا مدينة التاريخ والحضارات القديمة، موطن مدائن صالح.",
+        quiz: [
+          { question: "إلى أي حضارة تعود مدائن صالح؟", options: ["الإغريق", "الأنباط", "الرومان"], answer: 1 },
+          { question: "من الأكلات الشعبية في العلا:", options: ["الجريش", "السوشي", "الباستا"], answer: 0 },
+          { question: "اللباس التقليدي في العلا:", options: ["الثوب النجدي", "البذلة الرسمية", "الكيمونو"], answer: 0 },
+        ],
+      },
+      riyadh: {
+        title: "🌆 الرياض",
+        desc: "الرياض العاصمة الحديثة والمركز المالي والتجاري للمملكة.",
+        quiz: [
+          { question: "ما اسم البرج الأشهر في الرياض؟", options: ["برج خليفة", "برج المملكة", "برج بيزا"], answer: 1 },
+          { question: "من أشهر الأكلات في الرياض:", options: ["الكبسة", "السوشي", "البان كيك"], answer: 0 },
+          { question: "اللباس التقليدي في الرياض:", options: ["الثوب الأبيض مع الشماغ", "الجينز والتيشيرت", "الساري"], answer: 0 },
+        ],
+      },
+      aseer: {
+        title: "🏔️ عسير",
+        desc: "عسير أرض الجبال والضباب والفنون الشعبية.",
+        quiz: [
+          { question: "ما أبرز مهرجان في عسير؟", options: ["مهرجان كان", "مهرجان رجال ألمع", "مهرجان ريو"], answer: 1 },
+          { question: "من الأكلات الشعبية في عسير:", options: ["الحنيذ", "الشاورما", "الباستا"], answer: 0 },
+          { question: "اللباس التقليدي في عسير:", options: ["الثوب العسيري المطرز", "الجينز", "البذلة الرسمية"], answer: 0 },
+        ],
+      },
+      east: {
+        title: "🌊 المنطقة الشرقية",
+        desc: "المنطقة الشرقية أرض النفط والبحر واللؤلؤ.",
+        quiz: [
+          { question: "ما أشهر مورد طبيعي في الشرقية؟", options: ["الذهب", "النفط", "الفضة"], answer: 1 },
+          { question: "من الأكلات الشعبية في الشرقية:", options: ["السمك المشوي", "السوشي", "البرجر"], answer: 0 },
+          { question: "اللباس التقليدي في الشرقية:", options: ["الدشداشة مع البشت", "البدلة الرياضية", "الكيمونو"], answer: 0 },
+        ],
+      }
+    };
+
+    const screens = {
+      home: document.getElementById("screen-home"),
+      select: document.getElementById("screen-select"),
+      city: document.getElementById("screen-city"),
+      end: document.getElementById("screen-end"),
+      credit: document.getElementById("screen-credit"),
+    };
+
+    const startBtn = document.getElementById("start-btn");
+    const cityButtons = document.querySelectorAll(".city-btn");
+    const backToHomeBtn = document.getElementById("back-to-home");
+    const backToSelectBtn = document.getElementById("back-to-select");
+    const restartBtn = document.getElementById("restart-btn");
+    const shareBtn = document.getElementById("share-btn");
+    const creditBtn = document.getElementById("credit-btn");
+    const creditBackBtn = document.getElementById("credit-back-btn");
+
+    const cityTitle = screens.city.querySelector(".city-title");
+    const cityDesc = screens.city.querySelector(".city-desc");
+    const quizContainer = screens.city.querySelector(".quiz");
+    const scoreText = document.getElementById("score-text");
+
+    let currentCity = null;
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function showScreen(name) {
+      Object.values(screens).forEach(s => s.classList.remove("active"));
+      screens[name].classList.add("active");
     }
-  };
 
-  // المتغيرات
-  const homeScreen = document.getElementById("home");
-  const selectScreen = document.getElementById("select");
-  const cityScreen = document.getElementById("cityScreen");
-  const endScreen = document.getElementById("endScreen");
-
-  const startBtn = document.getElementById("startBtn");
-  const cityButtons = document.querySelectorAll(".cityBtn");
-  const backToHome = document.getElementById("backToHome");
-  const backToSelect = document.getElementById("backToSelect");
-  const restartBtn = document.getElementById("restartBtn");
-  const backToHomeFromEnd = document.getElementById("backToHomeFromEnd");
-
-  const cityTitle = document.getElementById("cityTitle");
-  const cityDesc = document.getElementById("cityDesc");
-  const cityImage = document.getElementById("cityImage");
-  const quizDiv = document.getElementById("quiz");
-  const scoreText = document.getElementById("scoreText");
-
-  let currentCity = null;
-  let currentQuestionIndex = 0;
-  let score = 0;
-
-  // دوال التنقل بين الشاشات
-  function showScreen(screen) {
-    homeScreen.classList.remove("active");
-    selectScreen.classList.remove("active");
-    cityScreen.classList.remove("active");
-    endScreen.classList.remove("active");
-
-    screen.classList.add("active");
-  }
-
-  // بدء الرحلة
-  startBtn.addEventListener("click", () => {
-    showScreen(selectScreen);
-  });
-
-  // العودة للرئيسية من اختيار المدينة
-  backToHome.addEventListener("click", () => {
-    showScreen(homeScreen);
-  });
-
-  // العودة لاختيار المدينة من شاشة المدينة
-  backToSelect.addEventListener("click", () => {
-    showScreen(selectScreen);
-  });
-
-  // إعادة الرحلة من شاشة النهاية
-  restartBtn.addEventListener("click", () => {
-    showScreen(homeScreen);
-  });
-
-  // العودة للرئيسية من شاشة النهاية
-  backToHomeFromEnd.addEventListener("click", () => {
-    showScreen(homeScreen);
-  });
-
-  // اختيار المدينة
-  cityButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      currentCity = btn.getAttribute("data-city");
-      currentQuestionIndex = 0;
-      score = 0;
-      loadCity();
-      showScreen(cityScreen);
+    startBtn.addEventListener("click", () => {
+      showScreen("select");
     });
-  });
 
-  // تحميل بيانات المدينة والسؤال الأول
-  function loadCity() {
-    const city = citiesData[currentCity];
-    cityTitle.textContent = city.title;
-    cityDesc.textContent = city.desc;
-    cityImage.src = city.image;
-    loadQuestion();
-  }
-
-  // تحميل السؤال الحالي
-  function loadQuestion() {
-    const city = citiesData[currentCity];
-    if (currentQuestionIndex >= city.quiz.length) {
-      showEnd();
-      return;
-    }
-    const q = city.quiz[currentQuestionIndex];
-    quizDiv.innerHTML = <h3>${q.question}</h3>;
-    q.options.forEach((opt, i) => {
-      const btn = document.createElement("button");
-      btn.textContent = opt;
-      btn.onclick = () => checkAnswer(i);
-      quizDiv.appendChild(btn);
+    backToHomeBtn.addEventListener("click", () => {
+      showScreen("home");
     });
-  }
 
-  // التحقق من الإجابة
-  function checkAnswer(selected) {
-    const city = citiesData[currentCity];
-    const q = city.quiz[currentQuestionIndex];
-    const buttons = quizDiv.querySelectorAll("button");
+    backToSelectBtn.addEventListener("click", () => {
+      showScreen("select");
+    });
 
-    buttons.forEach(btn => btn.disabled = true);
+    restartBtn.addEventListener("click", () => {
+      showScreen("home");
+    });
 
-    if (selected === q.answer) {
-      score++;
-      buttons[selected].classList.add("correct");
-    } else {
-      buttons[selected].classList.add("wrong");
-      buttons[q.answer].classList.add("correct");
-    }
+    shareBtn.addEventListener("click", () => {
+      alert("شارك رحلتك مع أصدقائك!");
+    });
 
-    setTimeout(() => {
-      currentQuestionIndex++;
+    creditBtn.addEventListener("click", () => {
+      showScreen("credit");
+    });
+
+    creditBackBtn.addEventListener("click", () => {
+      showScreen("home");
+    });
+
+    cityButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentCity = btn.dataset.city;
+        currentQuestionIndex = 0;
+        score = 0;
+        loadCity();
+        showScreen("city");
+      });
+    });
+
+    function loadCity() {
+      const city = citiesData[currentCity];
+      cityTitle.textContent = city.title;
+      cityDesc.textContent = city.desc;
       loadQuestion();
-    }, 1500);
-  }
+    }
 
-  // عرض شاشة النهاية
-  function showEnd() {
-    scoreText.textContent = لقد أجبت بشكل صحيح على ${score} من ${citiesData[currentCity].quiz.length} أسئلة.;
-    showScreen(endScreen);
-  }
+    function loadQuestion() {
+      const city = citiesData[currentCity];
+      if (currentQuestionIndex >= city.quiz.length) {
+        showEnd();
+        return;
+      }
+      const question = city.quiz[currentQuestionIndex];
+      quizContainer.innerHTML = `<h3>${question.question}</h3>`;
+      question.options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(i);
+        quizContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedIndex) {
+      const city = citiesData[currentCity];
+      const question = city.quiz[currentQuestionIndex];
+      const buttons = quizContainer.querySelectorAll("button");
+
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (selectedIndex === question.answer) {
+        score++;
+        buttons[selectedIndex].classList.add("correct");
+      } else {
+        buttons[selectedIndex].classList.add("wrong");
+        buttons[question.answer].classList.add("correct");
+      }
+
+      setTimeout(() => {
+        currentQuestionIndex++;
+        loadQuestion();
+      }, 1500);
+    }
+
+    function showEnd() {
+      scoreText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${citiesData[currentCity].quiz.length} أسئلة.`;
+      showScreen("end");
+    }
+  });
 </script>
 
 </body>
 </html>
-      
