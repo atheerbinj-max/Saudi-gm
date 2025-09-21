@@ -309,7 +309,30 @@
         <div class="end-buttons">
           <button id="restart-btn" class="btn shake-btn">🔄 إعادة الرحلة</button>
           <button id="share-btn" class="btn shake-btn">📤 شارك نتيجتك</button>
+          <button id="credit-btn" class="btn shake-btn" style="margin-top: 15px;">📋 عمل الطالبات</button>
         </div>
+      </div>
+      <div class="background end-bg"></div>
+    </section>
+
+    <!-- شاشة عمل الطالبات -->
+    <section id="screen-credit" class="screen">
+      <div class="content fade-in" style="text-align: center; padding: 40px 20px;">
+        <h2>عمل الطالبات</h2>
+        <p style="font-size: 1.5rem; margin: 20px 0;">
+          أثير بن جبل - دانة بالمعروف - ريفان باعجاج - زهور قحطان - مريم الحامد
+        </p>
+        <div style="display: flex; justify-content: space-between; margin-top: 60px; font-size: 1.2rem; color: #004d00;">
+          <div style="text-align: left;">
+            <p><strong>مديرة المدرسة :</strong> سمر العقيل</p>
+          </div>
+          <div style="text-align: right;">
+            <p><strong>إشراف المعلمتان :</strong> نورة الشمراني - منال العمري</p>
+          </div>
+        </div>
+        <button id="credit-back-btn" class="btn back-btn" style="top: auto; bottom: 20px; left: 50%; transform: translateX(-50%);">
+          ⬅️ العودة للرئيسية
+        </button>
       </div>
       <div class="background end-bg"></div>
     </section>
@@ -375,6 +398,7 @@
         select: document.getElementById("screen-select"),
         city: document.getElementById("screen-city"),
         end: document.getElementById("screen-end"),
+        credit: document.getElementById("screen-credit"),
       };
 
       const startBtn = document.getElementById("start-btn");
@@ -386,6 +410,8 @@
       const backBtn = document.getElementById("back-to-select");
       const restartBtn = document.getElementById("restart-btn");
       const shareBtn = document.getElementById("share-btn");
+      const creditBtn = document.getElementById("credit-btn");
+      const creditBackBtn = document.getElementById("credit-back-btn");
 
       let currentCity = null;
       let currentQuestionIndex = 0;
@@ -467,35 +493,4 @@
         const buttons = quizContainer.querySelectorAll('button');
 
         buttons.forEach(function(btn) {
-          btn.disabled = true;
-        });
-
-        if (selectedIndex === question.answer) {
-          buttons[selectedIndex].classList.add('correct');
-          score++;
-        } else {
-          buttons[selectedIndex].classList.add('wrong');
-          buttons[question.answer].classList.add('correct');
-        }
-
-        setTimeout(function() {
-          currentQuestionIndex++;
-          loadQuestion();
-        }, 1500);
-      };
-
-      backBtn.addEventListener("click", function() {
-        showScreen("select");
-      });
-
-      restartBtn.addEventListener("click", function() {
-        showScreen("home");
-      });
-
-      shareBtn.addEventListener("click", function() {
-        alert(`مبروك! حصلت على ${score} من ${citiesData[currentCity].quiz.length} نقطة! شارك نتيجتك مع أصدقائك.`);
-      });
-    });
-  </script>
-</body>
-</html>
+          btn.disabled =
