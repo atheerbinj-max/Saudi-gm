@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0; padding: 0;
+  font-family: 'Cairo', sans-serif;
+  background: #fff;
+  color: #004d00;
+  height: 100vh;
+  overflow: hidden;
+  direction: rtl;
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.screen {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  color: #004d00;
+  z-index: 1;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.background {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  filter: brightness(0.85);
+  z-index: 0;
+  transition: background-image 0.8s ease-in-out;
+}
+
+.home-bg { background-image: url('images/home.jpg'); }
+.select-bg { background-image: url('images/select.jpg'); }
+.city-bg { background-position: center bottom; background-repeat: no-repeat; background-size: cover; }
+.end-bg { background-image: url('images/end.jpg'); }
+
+h1.title {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+p.subtitle, p.top-text, p.city-desc, h2.city-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+button.btn {
+  background-color: #006C35;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 1.3rem;
+  padding: 12px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  user-select: none;
+}
+
+button.btn:hover {
+  box-shadow: 0 0 10px #CFAE62;
+  background-color: #005022;
+}
+
+#start-btn {
+  background: linear-gradient(45deg, #006C35, #CFAE62);
+  animation: pulse 3s infinite;
+  font-weight: bold;
+}
+
+button.city-btn {
+  background-color: #006C35;
+  border-radius: 15px;
+  margin: 10px auto;
+  width: 250px;
+  padding: 15px;
+  font-size: 1.4rem;
+  color: white;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  display: block;
+}
+
+button.city-btn:hover {
+  background-color: #004d00;
+  box-shadow: 0 0 15px #CFAE62;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #CFAE62;
+  color: #004d00;
+  font-weight: bold;
+  box-shadow: 0 0 10px #CFAE62;
+}
+
+.quiz button {
+  background-color: #006C35;
+  border-radius: 12px;
+  margin: 8px auto;
+  width: 220px;
+  padding: 12px;
+  font-size: 1.2rem;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: block;
+  transition: box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.quiz button:hover {
+  box-shadow: 0 0 12px #CFAE62;
+  background-color: #004d00;
+}
+
+.quiz button.correct {
+  background-color: #CFAE62;
+  color: #004d00;
+  box-shadow: 0 0 15px #FFD700;
+  cursor: default;
+}
+
+.quiz button.wrong {
+  background-color: #a33;
+  cursor: default;
+}
+
+.pulse-text {
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #CFAE62;
+  }
+  50% {
+    box-shadow: 0 0 20px #FFD700;
+  }
+}
