@@ -59,10 +59,10 @@
       transition: background-image 0.8s ease-in-out;
     }
 
-    .home-bg { background-image: url('images/home.jpg'); }
-    .select-bg { background-image: url('images/select.jpg'); }
+    .home-bg { background-image: url('images/home.jpg.jpg'); }
+    .select-bg { background-image: url('images/select.jpg.jpg'); }
     .city-bg { background-position: center bottom; background-repeat: no-repeat; background-size: cover; }
-    .end-bg { background-image: url('images/end.jpg'); }
+    .end-bg { background-image: url('images/end.jpg.jpg'); }
 
     h1.title {
       font-size: 3rem;
@@ -118,9 +118,10 @@
       box-shadow: 0 0 15px #CFAE62;
     }
 
+    /* أزلت تأثير fade-in من شاشة البداية لتجنب اختفاء المحتوى */
     .fade-in {
-      animation: fadeIn 1s ease forwards;
-      opacity: 0;
+      /* animation: fadeIn 1s ease forwards; */
+      opacity: 1 !important;
     }
 
     .slide-up {
@@ -193,7 +194,7 @@
       50% {
         transform: translateY(-10px);
       }
-    }
+      }
 
     .wave-text {
       display: inline-block;
@@ -269,7 +270,7 @@
   <div id="app">
     <!-- الشاشة الرئيسية -->
     <section id="screen-home" class="screen active">
-      <div class="content fade-in">
+      <div class="content">
         <h1 class="title">✈️ رحلتي في مناطق السعودية</h1>
         <p class="subtitle">اختر رحلتك وتعرف على ثقافة وتراث المملكة.</p>
         <button id="start-btn" class="btn pulse-btn">ابدأ رحلتك</button>
@@ -344,7 +345,7 @@
         makkah: {
           title: "🕋 مكة المكرمة",
           desc: "مكة المكرمة قبلة المسلمين وأقدس بقاع الأرض.",
-          background: "url('images/makkah.jpg')",
+          background: "url('images/makkah.jpg.jpg')",
           quiz: [
             { question: "في أي سنة وُحدت المملكة العربية السعودية؟", options: ["1925", "1932", "1945"], answer: 1 },
             { question: "من أشهر الأكلات في مكة:", options: ["المطبق", "البيتزا", "البرجر"], answer: 0 },
@@ -354,7 +355,7 @@
         alula: {
           title: "🏜️ العلا",
           desc: "العلا مدينة التاريخ والحضارات القديمة، موطن مدائن صالح.",
-          background: "url('images/alula.jpg')",
+          background: "url('images/alula.jpg.jpg')",
           quiz: [
             { question: "إلى أي حضارة تعود مدائن صالح؟", options: ["الإغريق", "الأنباط", "الرومان"], answer: 1 },
             { question: "من الأكلات الشعبية في العلا:", options: ["الجريش", "السوشي", "الباستا"], answer: 0 },
@@ -364,7 +365,7 @@
         riyadh: {
           title: "🌆 الرياض",
           desc: "الرياض العاصمة الحديثة والمركز المالي والتجاري للمملكة.",
-          background: "url('images/riyadh.jpg')",
+          background: "url('images/riyadh.jpg.jpg')",
           quiz: [
             { question: "ما اسم البرج الأشهر في الرياض؟", options: ["برج خليفة", "برج المملكة", "برج بيزا"], answer: 1 },
             { question: "من أشهر الأكلات في الرياض:", options: ["الكبسة", "السوشي", "البان كيك"], answer: 0 },
@@ -374,7 +375,7 @@
         aseer: {
           title: "🏔️ عسير",
           desc: "عسير أرض الجبال والضباب والفنون الشعبية.",
-          background: "url('images/aseer.jpg')",
+          background: "url('images/aseer.jpg.jpg')",
           quiz: [
             { question: "ما أبرز مهرجان في عسير؟", options: ["مهرجان كان", "مهرجان رجال ألمع", "مهرجان ريو"], answer: 1 },
             { question: "من الأكلات الشعبية في عسير:", options: ["الحنيذ", "الشاورما", "الباستا"], answer: 0 },
@@ -384,7 +385,7 @@
         east: {
           title: "🌊 المنطقة الشرقية",
           desc: "المنطقة الشرقية أرض النفط والبحر واللؤلؤ.",
-          background: "url('images/east.jpg')",
+          background: "url('images/east.jpg.jpg')",
           quiz: [
             { question: "ما أشهر مورد طبيعي في الشرقية؟", options: ["الذهب", "النفط", "الفضة"], answer: 1 },
             { question: "من الأكلات الشعبية في الشرقية:", options: ["السمك المشوي", "السوشي", "البرجر"], answer: 0 },
@@ -407,7 +408,8 @@
       const cityDesc = document.querySelector(".city-desc");
       const quizContainer = document.querySelector(".quiz");
       const cityBg = document.querySelector(".city-bg");
-      const backBtn = document.getElementById("back-to-select");
+      const backBtn = document.
+        getElementById("back-to-select");
       const restartBtn = document.getElementById("restart-btn");
       const shareBtn = document.getElementById("share-btn");
       const creditBtn = document.getElementById("credit-btn");
@@ -482,7 +484,7 @@
         quizContainer.innerHTML = `
           <h3>${question.question}</h3>
           ${question.options.map(function(option, index) {
-            return `<button onclick="checkAnswer(${index})">${option}</button>`;
+            return <button onclick="checkAnswer(${index})">${option}</button>;
           }).join('')}
         `;
       }
@@ -493,4 +495,7 @@
         const buttons = quizContainer.querySelectorAll('button');
 
         buttons.forEach(function(btn) {
-          btn.disabled =
+          btn.disabled = true;
+        });
+
+        if
