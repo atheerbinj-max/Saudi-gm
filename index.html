@@ -4,82 +4,270 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>رحلتي في مناطق السعودية</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #004d00;
+      margin: 0; padding: 20px;
+      text-align: center;
+    }
+    .screen {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    button {
+      background-color: #006C35;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 25px;
+      font-size: 1.2rem;
+      margin: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004d00;
+    }
+    .background {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .quiz button {
+      width: 80%;
+      margin: 8px auto;
+      display: block;
+    }
+    .correct {
+      background-color: #CFAE62 !important;
+      color: #004d00 !important;
+    }
+    .wrong {
+      background-color: #a33 !important;
+    }
+  </style>
 </head>
 <body>
-  <div id="app">
-    <!-- الشاشة الرئيسية -->
-    <section id="screen-home" class="screen active">
-      <div class="content">
-        <h1 class="title">✈️ رحلتي في مناطق السعودية</h1>
-        <p class="subtitle">اختر رحلتك وتعرف على ثقافة وتراث المملكة.</p>
-        <button id="start-btn" class="btn pulse-btn">ابدأ رحلتك</button>
-      </div>
-      <div class="background home-bg"></div>
-    </section>
 
-    <!-- شاشة اختيار المدينة -->
-    <section id="screen-select" class="screen">
-      <p class="top-text">اختر وجهتك الأولى في المملكة العربية السعودية:</p>
-      <div class="btn-container">
-        <button class="city-btn" data-city="makkah">🕋 مكة المكرمة</button>
-        <button class="city-btn" data-city="alula">🏜️ العلا</button>
-        <button class="city-btn" data-city="riyadh">🌆 الرياض</button>
-        <button class="city-btn" data-city="aseer">🏔️ عسير</button>
-        <button class="city-btn" data-city="east">🌊 المنطقة الشرقية</button>
-      </div>
-      <div class="background select-bg"></div>
-    </section>
-
-    <!-- شاشة المدينة -->
-    <section id="screen-city" class="screen">
-      <div class="city-content">
-        <h2 class="city-title"></h2>
-        <p class="city-desc"></p>
-        <div class="quiz"></div>
-      </div>
-      <div class="background city-bg"></div>
-      <button id="back-to-select" class="btn back-btn">⬅️ العودة لاختيار المدينة</button>
-    </section>
-
-    <!-- الشاشة النهائية -->
-    <section id="screen-end" class="screen">
-      <div class="content pulse-text">
-        <h2>مبروك 🌟 أنهيت رحلتك عبر مناطق السعودية!</h2>
-        <p>أنت الآن مستكشف حقيقي لتراث المملكة.</p>
-        <div class="end-buttons">
-          <button id="restart-btn" class="btn shake-btn">🔄 إعادة الرحلة</button>
-          <button id="share-btn" class="btn shake-btn">📤 شارك نتيجتك</button>
-          <button id="credit-btn" class="btn shake-btn" style="margin-top: 15px;">📋 عمل الطالبات</button>
-        </div>
-      </div>
-      <div class="background end-bg"></div>
-    </section>
-
-    <!-- شاشة عمل الطالبات -->
-    <section id="screen-credit" class="screen">
-      <div class="content" style="text-align: center; padding: 40px 20px;">
-        <h2>عمل الطالبات</h2>
-        <p style="font-size: 1.5rem; margin: 20px 0;">
-          أثير بن جبل - دانة بالمعروف - ريفان باعجاج - زهور قحطان - مريم الحامد
-        </p>
-        <div style="display: flex; justify-content: space-between; margin-top: 60px; font-size: 1.2rem; color: #004d00;">
-          <div style="text-align: left;">
-            <p><strong>مديرة المدرسة :</strong> سمر العقيل</p>
-          </div>
-          <div style="text-align: right;">
-            <p><strong>إشراف المعلمتان :</strong> نورة الشمراني - منال العمري</p>
-          </div>
-        </div>
-        <button id="credit-back-btn" class="btn back-btn" style="top: auto; bottom: 20px; left: 50%; transform: translateX(-50%);">
-          ⬅️ العودة للرئيسية
-        </button>
-      </div>
-      <div class="background end-bg"></div>
-    </section>
+  <!-- شاشة البداية -->
+  <div id="home" class="screen active">
+    <h1>✈️ رحلتي في مناطق السعودية</h1>
+    <button id="startBtn">ابدأ رحلتك</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- شاشة اختيار المدينة -->
+  <div id="select" class="screen">
+    <h2>اختر وجهتك الأولى:</h2>
+    <button class="cityBtn" data-city="makkah">🕋 مكة المكرمة</button>
+    <button class="cityBtn" data-city="alula">🏜️ العلا</button>
+    <button class="cityBtn" data-city="riyadh">🌆 الرياض</button>
+    <button class="cityBtn" data-city="aseer">🏔️ عسير</button>
+    <button class="cityBtn" data-city="east">🌊 المنطقة الشرقية</button>
+    <br />
+    <button id="backToHome">⬅️ العودة للرئيسية</button>
+  </div>
+
+  <!-- شاشة المدينة مع الأسئلة -->
+  <div id="cityScreen" class="screen">
+    <h2 id="cityTitle"></h2>
+    <img id="cityImage" class="background" src="" alt="صورة المدينة" />
+    <p id="cityDesc"></p>
+    <div class="quiz" id="quiz"></div>
+    <button id="backToSelect">⬅️ العودة لاختيار المدينة</button>
+  </div>
+
+  <!-- شاشة النهاية -->
+  <div id="endScreen" class="screen">
+    <h2>مبروك! أنهيت رحلتك.</h2>
+    <p id="scoreText"></p>
+    <button id="restartBtn">إعادة الرحلة</button>
+    <button id="backToHomeFromEnd">الرئيسية</button>
+  </div>
+
+<script>
+  // بيانات المدن والأسئلة
+  const citiesData = {
+    makkah: {
+      title: "🕋 مكة المكرمة",
+      desc: "مكة المكرمة قبلة المسلمين وأقدس بقاع الأرض.",
+      image: "images/makkah.jpg",
+      quiz: [
+        { question: "في أي سنة وُحدت المملكة العربية السعودية؟", options: ["1925", "1932", "1945"], answer: 1 },
+        { question: "من أشهر الأكلات في مكة:", options: ["المطبق", "البيتزا", "البرجر"], answer: 0 },
+        { question: "اللبس التقليدي في مكة:", options: ["الإحرام", "الكيمونو", "الساري"], answer: 0 },
+      ],
+    },
+    alula: {
+      title: "🏜️ العلا",
+      desc: "العلا مدينة التاريخ والحضارات القديمة، موطن مدائن صالح.",
+      image: "images/alula.jpg",
+      quiz: [
+        { question: "إلى أي حضارة تعود مدائن صالح؟", options: ["الإغريق", "الأنباط", "الرومان"], answer: 1 },
+        { question: "من الأكلات الشعبية في العلا:", options: ["الجريش", "السوشي", "الباستا"], answer: 0 },
+        { question: "اللباس التقليدي في العلا:", options: ["الثوب النجدي", "البذلة الرسمية", "الكيمونو"], answer: 0 },
+      ],
+    },
+    riyadh: {
+      title: "🌆 الرياض",
+      desc: "الرياض العاصمة الحديثة والمركز المالي والتجاري للمملكة.",
+      image: "images/riyadh.jpg",
+      quiz: [
+        { question: "ما اسم البرج الأشهر في الرياض؟", options: ["برج خليفة", "برج المملكة", "برج بيزا"], answer: 1 },
+        { question: "من أشهر الأكلات في الرياض:", options: ["الكبسة", "السوشي", "البان كيك"], answer: 0 },
+        { question: "اللباس التقليدي في الرياض:", options: ["الثوب الأبيض مع الشماغ", "الجينز والتيشيرت", "الساري"], answer: 0 },
+      ],
+    },
+    aseer: {
+      title: "🏔️ عسير",
+      desc: "عسير أرض الجبال والضباب والفنون الشعبية.",
+      image: "images/aseer.jpg",
+      quiz: [
+        { question: "ما أبرز مهرجان في عسير؟", options: ["مهرجان كان", "مهرجان رجال ألمع", "مهرجان ريو"], answer: 1 },
+        { question: "من الأكلات الشعبية في عسير:", options: ["الحنيذ", "الشاورما", "الباستا"], answer: 0 },
+        { question: "اللباس التقليدي في عسير:", options: ["الثوب العسيري المطرز", "الجينز", "البذلة الرسمية"], answer: 0 },
+      ],
+    },
+    east: {
+      title: "🌊 المنطقة الشرقية",
+      desc: "المنطقة الشرقية أرض النفط والبحر واللؤلؤ.",
+      image: "images/east.jpg",
+      quiz: [
+        { question: "ما أشهر مورد طبيعي في الشرقية؟", options: ["الذهب", "النفط", "الفضة"], answer: 1 },
+        { question: "من الأكلات الشعبية في الشرقية:", options: ["السمك المشوي", "السوشي", "البرجر"], answer: 0 },
+        { question: "اللباس التقليدي في الشرقية:", options: ["الدشداشة مع البشت", "البدلة الرياضية", "الكيمونو"], answer: 0 },
+      ],
+    }
+  };
+
+  // المتغيرات
+  const homeScreen = document.getElementById("home");
+  const selectScreen = document.getElementById("select");
+  const cityScreen = document.getElementById("cityScreen");
+  const endScreen = document.getElementById("endScreen");
+
+  const startBtn = document.getElementById("startBtn");
+  const cityButtons = document.querySelectorAll(".cityBtn");
+  const backToHome = document.getElementById("backToHome");
+  const backToSelect = document.getElementById("backToSelect");
+  const restartBtn = document.getElementById("restartBtn");
+  const backToHomeFromEnd = document.getElementById("backToHomeFromEnd");
+
+  const cityTitle = document.getElementById("cityTitle");
+  const cityDesc = document.getElementById("cityDesc");
+  const cityImage = document.getElementById("cityImage");
+  const quizDiv = document.getElementById("quiz");
+  const scoreText = document.getElementById("scoreText");
+
+  let currentCity = null;
+  let currentQuestionIndex = 0;
+  let score = 0;
+
+  // دوال التنقل بين الشاشات
+  function showScreen(screen) {
+    homeScreen.classList.remove("active");
+    selectScreen.classList.remove("active");
+    cityScreen.classList.remove("active");
+    endScreen.classList.remove("active");
+
+    screen.classList.add("active");
+  }
+
+  // بدء الرحلة
+  startBtn.addEventListener("click", () => {
+    showScreen(selectScreen);
+  });
+
+  // العودة للرئيسية من اختيار المدينة
+  backToHome.addEventListener("click", () => {
+    showScreen(homeScreen);
+  });
+
+  // العودة لاختيار المدينة من شاشة المدينة
+  backToSelect.addEventListener("click", () => {
+    showScreen(selectScreen);
+  });
+
+  // إعادة الرحلة من شاشة النهاية
+  restartBtn.addEventListener("click", () => {
+    showScreen(homeScreen);
+  });
+
+  // العودة للرئيسية من شاشة النهاية
+  backToHomeFromEnd.addEventListener("click", () => {
+    showScreen(homeScreen);
+  });
+
+  // اختيار المدينة
+  cityButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentCity = btn.getAttribute("data-city");
+      currentQuestionIndex = 0;
+      score = 0;
+      loadCity();
+      showScreen(cityScreen);
+    });
+  });
+
+  // تحميل بيانات المدينة والسؤال الأول
+  function loadCity() {
+    const city = citiesData[currentCity];
+    cityTitle.textContent = city.title;
+    cityDesc.textContent = city.desc;
+    cityImage.src = city.image;
+    loadQuestion();
+  }
+
+  // تحميل السؤال الحالي
+  function loadQuestion() {
+    const city = citiesData[currentCity];
+    if (currentQuestionIndex >= city.quiz.length) {
+      showEnd();
+      return;
+    }
+    const q = city.quiz[currentQuestionIndex];
+    quizDiv.innerHTML = <h3>${q.question}</h3>;
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement("button");
+      btn.textContent = opt;
+      btn.onclick = () => checkAnswer(i);
+      quizDiv.appendChild(btn);
+    });
+  }
+
+  // التحقق من الإجابة
+  function checkAnswer(selected) {
+    const city = citiesData[currentCity];
+    const q = city.quiz[currentQuestionIndex];
+    const buttons = quizDiv.querySelectorAll("button");
+
+    buttons.forEach(btn => btn.disabled = true);
+
+    if (selected === q.answer) {
+      score++;
+      buttons[selected].classList.add("correct");
+    } else {
+      buttons[selected].classList.add("wrong");
+      buttons[q.answer].classList.add("correct");
+    }
+
+    setTimeout(() => {
+      currentQuestionIndex++;
+      loadQuestion();
+    }, 1500);
+  }
+
+  // عرض شاشة النهاية
+  function showEnd() {
+    scoreText.textContent = لقد أجبت بشكل صحيح على ${score} من ${citiesData[currentCity].quiz.length} أسئلة.;
+    showScreen(endScreen);
+  }
+</script>
+
 </body>
 </html>
+      
