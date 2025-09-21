@@ -264,10 +264,6 @@
       margin-right: auto;
       text-align: center;
     }
-    .fade-in, .slide-up {
-  opacity: 1 !important;
-  animation: none !important;
-}
   </style>
 </head>
 <body>
@@ -503,3 +499,55 @@
         });
 
         if
+          window.checkAnswer = function(selectedIndex) {
+  const city = citiesData[currentCity];
+  const question = city.quiz[currentQuestionIndex];
+  const buttons = quizContainer.querySelectorAll('button');
+
+  // تعطيل جميع الأزرار بعد اختيار إجابة
+  buttons.forEach(function(btn) {
+    btn.disabled = true;
+  });
+
+  // تحقق من صحة الإجابة
+  if (selectedIndex === question.answer) {
+    score++;
+    buttons[selectedIndex].classList.add("correct");
+  } else {
+    buttons[selectedIndex].classList.add("wrong");
+    // تمييز الإجابة الصحيحة
+    buttons[question.answer].classList.add("correct");
+  }
+
+  // بعد 1.5 ثانية انتقل للسؤال التالي أو النهاية
+  setTimeout(function() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < city.quiz.length) {
+      loadQuestion();
+    } else {
+      showScreen("end");
+    }
+  }, 1500);
+};
+
+backBtn.addEventListener("click", function() {
+  showScreen("select");
+});
+
+restartBtn.addEventListener("click", function() {
+  showScreen("home");
+});
+
+shareBtn.addEventListener("click", function() {
+  alert("شارك رحلتك مع أصدقائك!");
+  // يمكن إضافة كود المشاركة هنا
+});
+
+creditBtn.addEventListener("click", function() {
+  showScreen("credit");
+});
+
+creditBackBtn.addEventListener("click", function() {
+  showScreen("home");
+});
+         
